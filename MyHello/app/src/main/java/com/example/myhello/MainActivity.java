@@ -17,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 //properties
     private TextView txtGreeting;
-    private Button btnClickMe;
+    private Button btnClickMe,btnMMMM;
 //hethods
     @SuppressLint("MissingInflatedId")
     @Override
