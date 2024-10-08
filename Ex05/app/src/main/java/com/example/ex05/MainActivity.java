@@ -1,12 +1,19 @@
 package com.example.ex05;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.text.DecimalFormat;
 
 public class MainActivity extends Activity {
     Button btnTieptuc,btnGiai,btnThoat;
@@ -26,30 +33,25 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 // TODO Auto-generated method stub String sa=edita.getText()+""; String sb=editb.getText()+""; String sc=editc.getText()+"";
-                int a=Integer.parseInt(sa); int b=Integer.parseInt(sb); int c=Integer.parseInt(sc); String kq="";
+                String sa = "";
+                int a=Integer.parseInt(sa);
+                String sb = "";
+                int b=Integer.parseInt(sb);
+                String sc = "";
+                int c=Integer.parseInt(sc); String kq="";
                 DecimalFormat dcf=new DecimalFormat("0.00");
-                if(a==0)
-                {
-                    if(b==0)
-                    {
-                        if(c==0)
-                            kq="PT vô số nghiệm";
-
-
-                    }
-                    else
-                    {
-
-                    else
-                        kq="PT vô nghiệm";
-
+                if(a==0) {
+                    if (b == 0) {
+                        if (c == 0)
+                            kq = "PT vô số nghiệm";
+                        else
+                            kq = "PT vô nghiệm";
+                    } else {
+                        kq = "Pt có 1 No, x=" + dcf.format(-c / b);
                     }
                 }
                 else
                 {
-
-                    kq="Pt có 1 No, x="+dcf.format(-c/b);
-
                     double delta=b*b-4*a*c;
                     if(delta<0)
                     {
@@ -70,16 +72,18 @@ public class MainActivity extends Activity {
         btnTieptuc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-// TODO Auto-generated method stub edita.setText("");
+// TODO Auto-generated method stub
+                edita.setText("");
                 editb.setText("");
-                editc.setText(""); edita.requestFocus();
+                editc.setText("");
+                edita.requestFocus();
             }
         });
         btnThoat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-// TODO Auto-generated method stub finish();
+// TODO Auto-generated method stub
+                finish();
             }
-        }
-
-
+        )}
+    ;}

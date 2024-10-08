@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="btntieptuc" type="id">btntieptuc</item>
+    <item name="btngiaipt" type="id">btngiaipt</item>
+    <item name="btnthoat" type="id">btnthoat</item>
+    <item name="edta" type="id">edta</item>
+    <item name="edtb" type="id">edtb</item>
+    <item name="edtc" type="id">edtc</item>
+    <item name="txtkq" type="id">txtkq</item>
+</resources>
