@@ -13,7 +13,14 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-
+    public class SendSMSActivity extends AppCompatActivity {
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+        }
+    }
+    Button btnCall = findViewById(R.id.btnCall);
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        View btnCall;
+        View btnCall = null;
         btnCall.setOnClickListener(new  View.OnClickListener()  {
             @Override
             public void onClick(View v) {
@@ -36,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
-        Button Send_SMS:
-        View btnSend;
+        Button Send_SMS;
+        View btnSend = null;
         btnSend.setOnClickListener(new  View.OnClickListener()  {
             @Override
             public void onClick(View v) {
