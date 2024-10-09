@@ -9,7 +9,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-
+    EditText edtHoTen, edtCCCD, edtBosung;
+    CheckBox ckDocBao, ckDocSach, ckDocCode;
+    Button btnGui;
+    RadioGroup group;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
