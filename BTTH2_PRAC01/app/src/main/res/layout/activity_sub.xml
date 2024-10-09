@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,14 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nhập họ và tên"
-        tools:ignore="TouchTargetSizeCheck" />
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/gpaEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nhập GPA"
-        tools:ignore="TouchTargetSizeCheck" />
+        android:minHeight="48dp" />
 
     <Button
         android:id="@+id/submitButton"
@@ -26,3 +25,4 @@
         android:layout_height="wrap_content"
         android:text="SUBMIT" />
 </LinearLayout>
+
