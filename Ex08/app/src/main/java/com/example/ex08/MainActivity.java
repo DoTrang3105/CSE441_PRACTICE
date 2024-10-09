@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         Button Send_SMS:
+        View btnSend;
         btnSend.setOnClickListener(new  View.OnClickListener()  {
             @Override
             public void onClick(View v) {

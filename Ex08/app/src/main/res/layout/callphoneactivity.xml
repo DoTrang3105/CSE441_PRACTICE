@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent">
@@ -21,19 +22,21 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:id="@+id/edtcall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/edtcall"
             android:layout_weight="1"
-            android:textSize="40sp" />
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="40sp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
+            android:id="@+id/btncall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/phone"
-            android:id="@+id/btncall" />
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </LinearLayout>
 
     <Button

@@ -32,7 +32,6 @@
 
         <ImageButton
             android:id="@+id/btnsms"
-            app:srcCompat="@drawable/sms"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
