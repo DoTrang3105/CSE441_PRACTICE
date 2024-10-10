@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-class StaffViewModel extends ViewModel {
+public class StaffViewModel extends ViewModel {
     private final MutableLiveData<List<Staff>> staffList = new MutableLiveData<>(new ArrayList<>());
 
     public LiveData<List<Staff>> getStaffList() {
