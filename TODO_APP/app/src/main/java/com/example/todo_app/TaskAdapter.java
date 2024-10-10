@@ -1,3 +1,5 @@
+package com.example.todo_app;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,8 +9,6 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.List;
-
-import kotlinx.coroutines.scheduling.Task;
 
 public class TaskAdapter extends ArrayAdapter<Task> {
 
@@ -21,11 +21,11 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         Task task = getItem(position);
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_task, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_main, parent, false);
         }
 
-        TextView textViewName = convertView.findViewById(R.id.text_view_name);
-        CheckBox checkBoxCompleted = convertView.findViewById(R.id.checkbox_completed);
+        TextView textViewName = convertView.findViewById(R.id.edit_text_task);
+        CheckBox checkBoxCompleted = convertView.findViewById(R.id.switch_show_completed);
 
         textViewName.setText(task.name);
         checkBoxCompleted.setChecked(task.completed);
