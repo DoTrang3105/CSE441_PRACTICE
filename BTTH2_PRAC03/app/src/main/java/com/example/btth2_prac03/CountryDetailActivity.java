@@ -14,6 +14,11 @@ public class CountryDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_country_detail);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // Bật nút back trên AppBar
+            getSupportActionBar().setTitle("Country Details");  // Đặt tiêu đề
+        }
+
         ImageView ivFlag = findViewById(R.id.ivFlagDetail);
         TextView tvNationName = findViewById(R.id.tvNationName);
         TextView tvCapital = findViewById(R.id.tvCapitalDetail);
@@ -42,5 +47,6 @@ public class CountryDetailActivity extends AppCompatActivity {
             tvDensity.setText("Density: " + density);
             tvWorldShare.setText("World Share: " + worldShare);
         }
+
     }
 }

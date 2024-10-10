@@ -37,7 +37,15 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, CountryDetailActivity.class);
+
             intent.putExtra("country", country.getFlagResId());
+            intent.putExtra("name", country.getName());
+            intent.putExtra("capital", country.getCapital());
+            intent.putExtra("population", country.getPopulation());
+            intent.putExtra("area", country.getArea());
+            intent.putExtra("density", country.getDensity());
+            intent.putExtra("worldShare", country.getWorldShare());
+            intent.putExtra("flagResId", country.getFlagResId());
             context.startActivity(intent);
         });
     }
