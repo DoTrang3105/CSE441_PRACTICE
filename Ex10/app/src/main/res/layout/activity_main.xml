@@ -10,15 +10,16 @@
         android:id="@+id/tv_sms_receiver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_light"
+        android:padding="8dp"
         android:text="SMS Receiver"
         android:textColor="@android:color/holo_red_light"
-        android:background="@android:color/holo_blue_light"
         android:textSize="24sp"
-        android:padding="8dp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
