@@ -54,7 +54,42 @@ public class MainActivity extends AppCompatActivity {
         txtdate.setText("Hôm nay: "+simpleDateFormat.format(currentDate));
         loadSavedWork();
         btnwork.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (edtwork.getText().toString().equals("")||edth.getText().toString().equals("")||edtm.getText().toString().equals("")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("Info missing");
+                    builder.setMessage("Please enter all infomation of the work");
+                    builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
 
+                        }
+                    });
+                    builder.show();
+                }
+                else {
+                    String str = edtwork.getText().toString() + " - "+edth.getText().toString() + ":"+edtm.getText().toString();
+                    arraywork.add(str);
+                    arrAdapter.notifyDataSetChanged();
+                    saveWorkList();
+                    edtm.setText("");
+                    edth.setText("");
+                    edtwork.setText("");
+                }
+            }
+        });
+        lv.setOnItemClickListener((parent, view, position, id) -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("Delete Work");
+            builder.setMessage("Are you sure you want to delete this work?");
+            builder.setPositiveButton("Yes", (dialogInterface, i) -> {
+                arraywork.remove(position);
+                arrAdapter.notifyDataSetChanged();
+                saveWorkList();
+            });
+            builder.setNegativeButton("No", null);
+            builder.show();
         });
     }
 
