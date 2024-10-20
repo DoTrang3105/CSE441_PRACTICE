@@ -1,24 +1,36 @@
 package com.example.ex14_02;
 
-import android.os.Bundle;
+public class Item {
+    private String maSo, TieuDe;
+    private Integer Thich;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+    public Item(String maSo, String tieuDe, Integer thich) {
+        this.maSo = maSo;
+        TieuDe = tieuDe;
+        Thich = thich;
+    }
 
-public class Item extends AppCompatActivity {
+    public String getMaSo() {
+        return maSo;
+    }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_item);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+    public void setMaSo(String maSo) {
+        this.maSo = maSo;
+    }
+
+    public String getTieuDe() {
+        return TieuDe;
+    }
+
+    public void setTieuDe(String tieuDe) {
+        TieuDe = tieuDe;
+    }
+
+    public Integer getThich() {
+        return Thich;
+    }
+
+    public void setThich(Integer thich) {
+        Thich = thich;
     }
 }

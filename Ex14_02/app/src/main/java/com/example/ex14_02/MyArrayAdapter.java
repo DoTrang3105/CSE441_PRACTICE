@@ -1,4 +1,4 @@
-package com.example.pj2_ex14;
+package com.example.ex14_02;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.ex14_02.Item;
+import com.example.ex14_02.R;
 
 import java.util.ArrayList;
 
@@ -37,9 +40,9 @@ public class MyArrayAdapter extends ArrayAdapter<Item> {
         ImageView btnLike = convertView.findViewById(R.id.imgLike);
         int thich = myItem.getThich();
         if (thich == 1) {
-            btnLike.setImageResource(R.drawable.like);
+            btnLike.setImageResource(R.drawable.ic_launcher_foreground);
         } else {
-            btnLike.setImageResource(R.drawable.favourite);
+            btnLike.setImageResource(R.drawable.ic_launcher_foreground);
         }
 
         TextView tieude = convertView.findViewById(R.id.txtTieuDe);
