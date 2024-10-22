@@ -65,5 +65,13 @@ public class MainActivity extends AppCompatActivity {
         return students;
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && data != null) {
+            Student newStudent = (Student) data.getSerializableExtra("newStudent");
+            studentList.add(newStudent);
+            studentAdapter.notifyItemInserted(studentList.size() - 1);
+        }
+    }
 }
