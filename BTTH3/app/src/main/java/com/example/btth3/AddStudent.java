@@ -1,4 +1,4 @@
-package com.example.pj_btth03;
+package com.example.btth3;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.btth3.R;
+
 public class AddStudent extends AppCompatActivity {
 
     private EditText edtId, edtName, edtBirthDay, edtAddress, edtEmail, edtGPA;
@@ -21,7 +23,7 @@ public class AddStudent extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_student);
+        setContentView(R.layout.activity_addstudent);
 
         edtId = findViewById(R.id.edtId);
         edtName = findViewById(R.id.edtName);
