@@ -1,63 +1,77 @@
 package com.example.ex16;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-    EditText edtA, edtB, edtKQ;
-    Button btnTong, btnClear;
-    TextView txtLichSu;
-    String lichsu = "";
+
+    private EditText edtA, edtB;
+    private TextView edtKQ;
+    private Button btnTong, btnClear;
+    private TextView txtLichSu;
+    private StringBuilder lichSu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         edtA = findViewById(R.id.edtA);
         edtB = findViewById(R.id.edtB);
         edtKQ = findViewById(R.id.edtKQ);
         btnTong = findViewById(R.id.btnTong);
         btnClear = findViewById(R.id.btnClear);
         txtLichSu = findViewById(R.id.txtLichSu);
-        SharedPreferences myprefs = getSharedPreferences("mysave", MODE_PRIVATE);
-        lichsu = myprefs.getString("ls","");
-        txtLichSu.setText(lichsu);
+
+        lichSu = new StringBuilder();  // Dùng để lưu lịch sử phép tính
+
+        // Xử lý khi nhấn nút "Tổng"
         btnTong.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                int a = Integer.parseInt(edtA.getText().toString());
-                int b = Integer.parseInt(edtB.getText().toString());
-                int kq = a + b;
-                edtKQ.setText(kq+"");
-                lichsu += a+" + "+b+" = "+kq;
-                txtLichSu.setText(lichsu);
-                lichsu += "\n";
+            public void onClick(View v) {
+                calculateSum();
             }
         });
+
+        // Xử lý khi nhấn nút "Clear"
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                lichsu="";
-                txtLichSu.setText(lichsu);
+            public void onClick(View v) {
+                clearInputs();
             }
         });
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        SharedPreferences myprefs = getSharedPreferences("mysave", MODE_PRIVATE);
-        SharedPreferences.Editor myedit = myprefs.edit();
-        myedit.putString("ls", lichsu);
-        myedit.commit();
+    // Hàm tính tổng và hiển thị kết quả
+    private void calculateSum() {
+        String valueA = edtA.getText().toString();
+        String valueB = edtB.getText().toString();
+
+        if (TextUtils.isEmpty(valueA) || TextUtils.isEmpty(valueB)) {
+            edtKQ.setText("Vui lòng nhập đủ số");
+            return;
+        }
+
+        // Chuyển đổi giá trị nhập thành số nguyên
+        int a = Integer.parseInt(valueA);
+        int b = Integer.parseInt(valueB);
+        int sum = a + b;
+
+        // Hiển thị kết quả tổng
+        edtKQ.setText(String.valueOf(sum));
+
+
+    }
+
+    // Hàm để xóa dữ liệu nhập và kết quả
+    private void clearInputs() {
+        edtA.setText("");
+        edtB.setText("");
+        edtKQ.setText("");
     }
 }
