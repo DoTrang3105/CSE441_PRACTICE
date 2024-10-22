@@ -65,7 +65,9 @@ public class MainActivity extends AppCompatActivity {
         // Hiển thị kết quả tổng
         edtKQ.setText(String.valueOf(sum));
 
-
+        // Lưu lịch sử phép tính
+        lichSu.append(a).append(" + ").append(b).append(" = ").append(sum).append("\n");
+        txtLichSu.setText(lichSu.toString());
     }
 
     // Hàm để xóa dữ liệu nhập và kết quả
