@@ -63,5 +63,24 @@ public class MainActivity extends AppCompatActivity {
     private String getDatabasePath(){
         return getApplicationInfo().dataDir + DB_PATH_SUFFIX + DATABASE_NAME;
     }
-
+    public void CopyDataBaseFromAsset() {
+        try {
+            InputStream myInput;
+            myInput = getAssets().open(DATABASE_NAME);
+            String outFileName = getDatabasePath();
+            File f = new File(getApplicationInfo().dataDir + DB_PATH_SUFFIX);
+            if (!f.exists())
+                f.mkdir();
+            OutputStream myOutput = new FileOutputStream(outFileName);
+            int size = myInput.available();
+            byte[] buffer = new byte[size];
+            myInput.read(buffer);
+            myOutput.write(buffer);
+            myOutput.flush();
+            myOutput.close();
+            myInput.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
