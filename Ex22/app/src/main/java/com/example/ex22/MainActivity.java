@@ -45,7 +45,55 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    class LoadExampleTask extends AsyncTask<Void, Void, ArrayList<String>>
+    {
+        @Override
+        protected ArrayList<String> doInBackground(Void... voids) {
+            ArrayList<String> list = new ArrayList<String>();
+            try {
+                XmlPullParserFactory fc = XmlPullParserFactory.newInstance();
+                XmlPullParser parser = fc.newPullParser();
+                XMLParser myParser = new XMLParser();
+                String xml = myParser.getXMLFromUrl(URL);
+                parser.setInput(new StringReader(xml));
+                int eventType = -1;
+                String nodeName;
+                String dataShow="";
+                while (eventType!=XmlPullParser.END_DOCUMENT)
+                {
+                    eventType = parser.next();
+                    switch (eventType)
+                    {
+                        case XmlPullParser.START_DOCUMENT:
+                            break;
+                        case XmlPullParser.END_DOCUMENT:
+                            break;
+                        case XmlPullParser.START_TAG:
+                            nodeName = parser.getName();
+                            if(nodeName.equals("id")){
+                                dataShow+=parser.nextText()+"-";
+                            } else if (nodeName.equals("name")) {
+                                dataShow+=parser.nextText();
+                            }
+                            break;
+                        case XmlPullParser.END_TAG:
+                            nodeName=parser.getName();
+                            if(nodeName.equals("item")){
+                                list.add(dataShow);
+                                dataShow="";
+                            }
+                            break;
+                    }
+                }
+            } catch (XmlPullParserException e){
+                e.printStackTrace();
+            } catch (FileNotFoundException e){
+                e.printStackTrace();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+            return list;
+        }
 
         @Override
         protected void onPreExecute() {
