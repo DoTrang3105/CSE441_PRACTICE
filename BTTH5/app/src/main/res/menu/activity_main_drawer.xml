@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_cafe"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Cafe"/>
+        <item
+            android:id="@+id/nav_FruitJuice"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Fruit Juice" />
+        <item
+            android:id="@+id/nav_SpecialTea"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Special Tea" />
+        <item
+            android:id="@+id/nav_Cake"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Cake"/>
+        <item
+            android:id="@+id/nav_Saltycake"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Salty cake" />
+        <item
+            android:id="@+id/nav_Setting"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Setting" />
+        <item
+            android:id="@+id/nav_Signout"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Sign out"/>
+    </group>
+</menu>
