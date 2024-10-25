@@ -1,12 +1,10 @@
 package com.example.ex23;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,12 +14,12 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyArrayAdapter extends ArrayAdapter {
+public class MyArrayAdapter extends ArrayAdapter<List> {
     private Activity context;
     private ArrayList<List> arr;
     private int layoutID;
 
-    public MyArrayAdapter( Activity context, ArrayList<List> arr, int layoutID) {
+    public MyArrayAdapter(Activity context, ArrayList<List> arr, int layoutID) {
         super(context, layoutID, arr);
         this.context = context;
         this.arr = arr;
@@ -31,16 +29,24 @@ public class MyArrayAdapter extends ArrayAdapter {
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = context.getLayoutInflater();
-        convertView  = inflater.inflate(layoutID, null);
-        final List lst = arr.get(position);
-        ImageView imgitem = convertView.findViewById(R.id.imgView);
-        imgitem.setImageBitmap(lst.getImg());
+        if (convertView == null) {
+            LayoutInflater inflater = context.getLayoutInflater();
+            convertView = inflater.inflate(layoutID, null);
+        }
 
+        final List lst = arr.get(position);
+
+        // Gán ảnh từ `lst`
+        ImageView imgItem = convertView.findViewById(R.id.imgView);
+        Bitmap imageBitmap = lst.getImage(); // Giả sử `getImage()` trả về Bitmap
+        imgItem.setImageBitmap(imageBitmap);
+
+        // Gán tiêu đề và thông tin
         TextView txtTitle = convertView.findViewById(R.id.txtTitle);
-        txtTitle.setText(lst.getTitle().toString());
+        txtTitle.setText(lst.getTitle()); // Giả sử `getTitle()` trả về tiêu đề
+
         TextView txtInfo = convertView.findViewById(R.id.txtInfo);
-        txtInfo.setText(lst.getInfo().toString());
+        txtInfo.setText(lst.getDescription()); // Giả sử `getDescription()` trả về mô tả
 
         return convertView;
     }

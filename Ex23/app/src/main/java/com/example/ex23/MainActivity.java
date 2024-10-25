@@ -1,7 +1,6 @@
 package com.example.ex23;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,18 +10,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
-import com.example.pj23.MyArrayAdapter;
 import com.example.pj23.List;
-import com.example.pj23.XMLParser;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.StringReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -37,14 +32,15 @@ public class MainActivity extends AppCompatActivity {
     String des = "";
     String urlStr = "";
     Bitmap mIcon_val = null;
-    String URL = "https://vnexpress.net/rss/thoi-su.rss";
+    String rssUrl = "https://vnexpress.net/rss/thoi-su.rss"; // Đổi tên URL để tránh xung đột
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         lv1 = findViewById(R.id.lv1);
-        myList = new ArrayList<List>();
+        myList = new ArrayList<>();
         myadapter = new MyArrayAdapter(MainActivity.this, myList, R.layout.layout_listview);
         lv1.setAdapter(myadapter);
         LoadExampleTask task = new LoadExampleTask();
@@ -57,62 +53,58 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
-    class LoadExampleTask extends AsyncTask<Void, Void, ArrayList<List>>{
+    class LoadExampleTask extends AsyncTask<Void, Void, ArrayList<List>> {
         @Override
         protected ArrayList<List> doInBackground(Void... voids) {
-            myList = new ArrayList<List>();
+            myList = new ArrayList<>();
             try {
                 XmlPullParserFactory fc = XmlPullParserFactory.newInstance();
                 XmlPullParser parser = fc.newPullParser();
                 XMLParser myparser = new XMLParser();
-                String xml = myparser.getXmlFromUrl(URL);
+                String xml = myparser.getXmlFromUrl(rssUrl);
                 parser.setInput(new StringReader(xml));
-                int eventType = -1;
-                while(eventType != XmlPullParser.END_DOCUMENT ){
-                    eventType = parser.next();
-                    switch (eventType){
-                        case XmlPullParser.START_DOCUMENT:
-                            break;
-                        case XmlPullParser.END_DOCUMENT:
-                            break;
+                int eventType = parser.getEventType();
+                while (eventType != XmlPullParser.END_DOCUMENT) {
+                    switch (eventType) {
                         case XmlPullParser.START_TAG:
                             nodeName = parser.getName();
-                            if (nodeName.equals("title")){
+                            if (nodeName.equals("title")) {
                                 title = parser.nextText();
-                            }else if (nodeName.equals("link")){
+                            } else if (nodeName.equals("link")) {
                                 link = parser.nextText();
-                            }else if (nodeName.equals("description")){
+                            } else if (nodeName.equals("description")) {
                                 description = parser.nextText();
-                                try {
-                                    urlStr = description.substring((description.indexOf("src=") + 5),(description.indexOf("8.jpg") + 5));
-                                }catch (Exception e1){
-                                    e1.printStackTrace();
-                                }
-                                des = description.substring(description.indexOf("</br>") + 5);
-                                try {
-                                    java.net.URL newurl = new URL(urlStr.toString() + "");
-                                    mIcon_val = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
-                                }catch (IOException e1){
-                                    e1.printStackTrace();
+                                int srcIndex = description.indexOf("src=");
+                                int jpgIndex = description.indexOf("8.jpg");
+                                if (srcIndex != -1 && jpgIndex != -1) {
+                                    urlStr = description.substring(srcIndex + 5, jpgIndex + 5);
+                                    des = description.substring(description.indexOf("</br>") + 5);
+                                    try {
+                                        URL newUrl = new URL(urlStr);
+                                        mIcon_val = BitmapFactory.decodeStream(newUrl.openConnection().getInputStream());
+                                    } catch (MalformedURLException e) {
+                                        e.printStackTrace();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else {
+                                    mIcon_val = null; // Không tải được ảnh
                                 }
                             }
                             break;
                         case XmlPullParser.END_TAG:
                             nodeName = parser.getName();
-                            if (nodeName.equals("item")){
+                            if (nodeName.equals("item")) {
                                 myList.add(new List(mIcon_val, title, des, link));
+                                mIcon_val = null; // Reset lại cho bài viết kế tiếp
                             }
                             break;
                     }
+                    eventType = parser.next();
                 }
-            }catch (XmlPullParserException e){
-                e.printStackTrace();
-            }catch (FileNotFoundException e){
-                e.printStackTrace();
-            }catch (IOException e){
+            } catch (XmlPullParserException | IOException e) {
                 e.printStackTrace();
             }
             return myList;
@@ -129,11 +121,6 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             myadapter.clear();
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
         }
     }
 }
