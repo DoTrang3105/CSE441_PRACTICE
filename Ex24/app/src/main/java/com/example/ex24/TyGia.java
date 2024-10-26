@@ -1,4 +1,4 @@
-package com.example.pj24;
+package com.example.ex24;
 import android.graphics.Bitmap;
 
 public class TyGia {

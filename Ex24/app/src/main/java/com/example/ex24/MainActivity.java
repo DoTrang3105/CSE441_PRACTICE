@@ -8,11 +8,7 @@ import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -55,10 +51,10 @@ public class MainActivity extends AppCompatActivity {
         txtdate.setText("Hôm nay: " + simpleDateFormat.format(currentDate));
     }
 
-    class TyGiaTask extends AsyncTask<Void, Void, ArrayList<TyGia>> {
+    class TyGiaTask extends AsyncTask<Void, Void, ArrayList<com.example.pj24.TyGia>> {
         @Override
-        protected ArrayList<TyGia> doInBackground(Void... voids) {
-            ArrayList<TyGia> ds = new ArrayList<>();
+        protected ArrayList<com.example.pj24.TyGia> doInBackground(Void... voids) {
+            ArrayList<com.example.pj24.TyGia> ds = new ArrayList<>();
             try {
                 URL url = new URL("http://dongabank.com.vn/exchange/export");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -126,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
                     if (item.has("banck")) {
                         tyGia.setBanck(item.getString("banck"));
                     }
-                    ds.add(com.example.ex24.TyGia);
                 }
                 Log.d("JSON_DONGA", json);
             } catch (Exception ex) {
@@ -142,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(ArrayList<TyGia> tyGias) {
+        protected void onPostExecute(ArrayList<com.example.pj24.TyGia> tyGias) {
             super.onPostExecute(tyGias);
             myadapter.clear();
             myadapter.addAll(tyGias);
